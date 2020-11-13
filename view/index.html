@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search</title>
+</head>
+<body>
+  <div>
+    <input name="keywords" type="text" value="<script>alert('xss')</script>">
+    <button onclick="DOMSearch()">DOM型</button>
+    <button onclick="reflectSearch()">反射型</button>
+    <button onclick="ejsSearch()">ejs模板引擎</button>
+  </div>
+  <script>
+    function getKeywords () {
+      return document.querySelector('input[name = "keywords"]').value
+    }
+
+    function DOMSearch() {
+      window.location.href = `/result-dom?keywords=${getKeywords()}`
+    }
+
+    function reflectSearch() {
+      window.location.href = `/result-reflect?keywords=${getKeywords()}`
+    }
+
+    function ejsSearch() {
+      window.location.href = `/result-ejs?keywords=${getKeywords()}`
+    }
+  </script>
+</body>
+</html>

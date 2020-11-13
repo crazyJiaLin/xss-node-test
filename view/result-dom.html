@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search result</title>
+</head>
+<body>
+    <div id="content"></div>
+    <input type="text" name="test">
+
+    <script src="/js/jquery-3.1.0.min.js"></script>
+    <script>
+      let query = getQuery()
+      $('#content').html('your keywords is ' + query.keywords)
+      $('input[name = test]').val(query.keywords)
+      console.log($('input[name = test]'))
+
+      // 获取浏览器url中 query
+      function getQuery() {
+        const url = decodeURI(location.search); // 获取url中"?"符后的字串(包括问号)
+        let query = {};
+        if (url.indexOf("?") != -1) {
+          const str = url.substr(1);
+          const pairs = str.split("&");
+          for(let i = 0; i < pairs.length; i ++) {
+            const pair = pairs[i].split("=");
+            query[pair[0]] = pair[1];
+          }
+        }
+        return query ;  // 返回对象
+      }
+    </script>
+</body>
+</html>
